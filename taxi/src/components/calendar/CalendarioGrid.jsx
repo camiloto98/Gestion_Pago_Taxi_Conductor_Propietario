@@ -12,6 +12,7 @@ import {
   addDays,
 } from 'date-fns';
 import api from '../../services/api';
+import { assetUrl } from '../../config/env';
 import DiaCell from './DiaCell';
 import Modal from '../ui/Modal';
 import Button from '../ui/Button';
@@ -284,7 +285,7 @@ export default function CalendarioGrid({ vehiculoId, mes, año, rol }) {
       >
         {selectedPago?.imagen_url ? (
           <div className="pagoImg">
-            <img alt="Comprobante" src={`http://localhost:3001${selectedPago.imagen_url}`} />
+            <img alt="Comprobante" src={assetUrl(selectedPago.imagen_url)} />
           </div>
         ) : (
           <div style={{ opacity: 0.85 }}>No hay comprobante para este día.</div>

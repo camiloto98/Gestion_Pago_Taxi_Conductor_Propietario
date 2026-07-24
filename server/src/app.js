@@ -6,7 +6,9 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
-const UPLOADS_DIR = path.resolve(__dirname, '../uploads');
+const UPLOADS_DIR = process.env.UPLOAD_PATH
+  ? path.resolve(process.env.UPLOAD_PATH)
+  : path.resolve(__dirname, '../uploads');
 if (!fs.existsSync(UPLOADS_DIR)) fs.mkdirSync(UPLOADS_DIR, { recursive: true });
 
 const authRoutes = require('./routes/auth.routes');
@@ -18,9 +20,29 @@ const feedRoutes = require('./routes/feed.routes');
 
 const app = express();
 
+const allowedOrigins = [
+  'http://localhost:5173',
+  'http://localhost:4173',
+  process.env.FRONTEND_URL,
+].filter(Boolean);
+
+if (process.env.VERCEL_URL) {
+  allowedOrigins.push(`https://${process.env.VERCEL_URL}`);
+}
+
 app.use(
   cors({
-    origin: 'http://localhost:5173',
+    origin(origin, callback) {
+      if (
+        !origin
+        || allowedOrigins.includes(origin)
+        || /\.vercel\.app$/.test(origin)
+      ) {
+        callback(null, true);
+      } else {
+        callback(null, false);
+      }
+    },
     credentials: true,
   })
 );
@@ -52,10 +74,9 @@ const GREEN = '\x1b[32m';
 const RED   = '\x1b[31m';
 const RESET = '\x1b[0m';
 
-const PORT = process.env.PORT || 3001;
-app.listen(PORT, async () => {
-  // eslint-disable-next-line no-console
-  console.log(`Server running on http://localhost:${PORT}`);
+module.exports = app;
+
+async function logDbStatus() {
   try {
     const conn = await pool.getConnection();
     conn.release();
@@ -65,5 +86,14 @@ app.listen(PORT, async () => {
     // eslint-disable-next-line no-console
     console.error(`${RED}✘ Error al conectar con la base de datos: ${err.message}${RESET}`);
   }
-});
+}
+
+if (require.main === module) {
+  const PORT = process.env.PORT || 3001;
+  app.listen(PORT, async () => {
+    // eslint-disable-next-line no-console
+    console.log(`Server running on http://localhost:${PORT}`);
+    await logDbStatus();
+  });
+}
 

@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Check, X } from 'lucide-react';
 import { isSameMonth, isToday } from 'date-fns';
+import { assetUrl } from '../../config/env';
 
 function statusFor({ date, monthDate, pago }) {
   if (!isSameMonth(date, monthDate)) return 'out';
@@ -45,7 +46,7 @@ export default function DiaCell({
 
       {pago?.imagen_url ? (
         <div className="diaCell__thumb">
-          <img alt="Comprobante" src={`http://localhost:3001${pago.imagen_url}`} />
+          <img alt="Comprobante" src={assetUrl(pago.imagen_url)} />
         </div>
       ) : null}
       {pago?.imagen_url && rol === 'propietario' ? (

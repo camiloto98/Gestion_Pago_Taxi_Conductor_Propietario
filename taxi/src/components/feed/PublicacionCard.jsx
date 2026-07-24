@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { Heart, MessageCircle } from 'lucide-react';
 import api from '../../services/api';
+import { assetUrl } from '../../config/env';
 import Badge from '../ui/Badge';
 import Button from '../ui/Button';
 import Input from '../ui/Input';
@@ -74,7 +75,7 @@ export default function PublicacionCard({ post, onChanged }) {
 
       {post.imagen_url ? (
         <div className="feedImg">
-          <img alt="Publicación" src={`http://localhost:3001${post.imagen_url}`} />
+          <img alt="Publicación" src={assetUrl(post.imagen_url)} />
         </div>
       ) : null}
 
