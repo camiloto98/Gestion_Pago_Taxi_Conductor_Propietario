@@ -40,6 +40,8 @@ async function register(req, res, next) {
 
 async function login(req, res, next) {
   try {
+    console.log('[LOGIN] req.body:', JSON.stringify(req.body));
+    console.log('[LOGIN] req.headers.content-type:', req.headers['content-type']);
     const { email, password } = req.body || {};
     if (!email || !password) return res.status(400).json({ message: 'Datos incompletos' });
 
