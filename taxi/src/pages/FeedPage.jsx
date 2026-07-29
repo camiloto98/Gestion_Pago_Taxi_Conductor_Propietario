@@ -34,10 +34,10 @@ export default function FeedPage() {
   }, []);
 
   return (
-    <div className="container" style={{ padding: '22px 0 70px' }}>
+    <div className="container" style={{ padding: 'clamp(14px, 3vw, 22px) 0 70px' }}>
       <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: 12, flexWrap: 'wrap' }}>
         <div>
-          <div style={{ fontFamily: 'var(--font-display)', fontSize: 44, letterSpacing: 1.2 }}>Comunidad</div>
+          <div className="title-display">Comunidad</div>
           <div style={{ opacity: 0.85 }}>Alertas y novedades de la ciudad</div>
         </div>
       </div>

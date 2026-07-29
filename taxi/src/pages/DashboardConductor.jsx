@@ -22,10 +22,10 @@ export default function DashboardConductor() {
   }, []);
 
   return (
-    <div className="container" style={{ padding: '22px 0 50px' }}>
+    <div className="container" style={{ padding: 'clamp(14px, 3vw, 22px) 0 50px' }}>
       <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: 12, flexWrap: 'wrap' }}>
         <div>
-          <div style={{ fontFamily: 'var(--font-display)', fontSize: 44, letterSpacing: 1.2 }}>Dashboard</div>
+          <div className="title-display">Dashboard</div>
           <div style={{ opacity: 0.85 }}>Conductor</div>
         </div>
         <Link to="/vehiculos/unirse">

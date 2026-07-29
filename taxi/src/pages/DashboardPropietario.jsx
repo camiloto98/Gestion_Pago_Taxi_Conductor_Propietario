@@ -1,12 +1,16 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Copy, Check } from 'lucide-react';
 import toast from 'react-hot-toast';
 import api from '../services/api';
 import Button from '../components/ui/Button';
+import Modal from '../components/ui/Modal';
 
 export default function DashboardPropietario() {
   const [vehiculos, setVehiculos] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [tokenModal, setTokenModal] = useState({ open: false, codigo: '', vehiculoPlaca: '' });
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -21,21 +25,31 @@ export default function DashboardPropietario() {
     })();
   }, []);
 
-  async function generarToken(vehiculoId) {
+  async function generarToken(vehiculoId, placa) {
     try {
       const { data } = await api.post('/tokens/generar', { vehiculoId });
-      toast.success(`Token generado: ${data.codigo}`);
-      await navigator.clipboard?.writeText?.(data.codigo);
+      setTokenModal({ open: true, codigo: data.codigo, vehiculoPlaca: placa });
+      setCopied(false);
     } catch (err) {
       toast.error(err?.response?.data?.message || 'No se pudo generar el token');
     }
   }
 
+  async function copiarToken() {
+    try {
+      await navigator.clipboard.writeText(tokenModal.codigo);
+      setCopied(true);
+      toast.success('Token copiado al portapapeles');
+    } catch {
+      toast.error('No se pudo copiar automáticamente');
+    }
+  }
+
   return (
-    <div className="container" style={{ padding: '22px 0 50px' }}>
+    <div className="container" style={{ padding: 'clamp(14px, 3vw, 22px) 0 50px' }}>
       <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: 12, flexWrap: 'wrap' }}>
         <div>
-          <div style={{ fontFamily: 'var(--font-display)', fontSize: 44, letterSpacing: 1.2 }}>Dashboard</div>
+          <div className="title-display">Dashboard</div>
           <div style={{ opacity: 0.85 }}>Propietario</div>
         </div>
         <Link to="/vehiculos/nuevo">
@@ -61,7 +75,7 @@ export default function DashboardPropietario() {
                     </div>
                   </div>
                   <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', justifyContent: 'flex-end' }}>
-                    <Button variant="ghost" onClick={() => generarToken(v.id)}>
+                    <Button variant="ghost" onClick={() => generarToken(v.id, v.placa)}>
                       Generar token
                     </Button>
                     <Link to={`/calendario/${v.id}`}>
@@ -76,6 +90,49 @@ export default function DashboardPropietario() {
           )}
         </div>
       </div>
+
+      <Modal
+        open={tokenModal.open}
+        title={`🔑 Token para ${tokenModal.vehiculoPlaca}`}
+        onClose={() => setTokenModal({ ...tokenModal, open: false })}
+        footer={
+          <Button variant="ghost" type="button" onClick={() => setTokenModal({ ...tokenModal, open: false })}>
+            Cerrar
+          </Button>
+        }
+      >
+        <div style={{ display: 'grid', gap: 16, textAlign: 'center' }}>
+          <div style={{ opacity: 0.85, fontSize: 14 }}>
+            Comparte este código con el conductor para que se vincule:
+          </div>
+          <div
+            style={{
+              fontFamily: 'var(--font-mono)',
+              fontSize: 32,
+              fontWeight: 700,
+              letterSpacing: 4,
+              color: 'var(--amarillo-taxi)',
+              background: 'rgba(255,215,0,0.06)',
+              border: '1px solid rgba(255,215,0,0.2)',
+              borderRadius: 16,
+              padding: '16px 12px',
+            }}
+          >
+            {tokenModal.codigo}
+          </div>
+          <Button onClick={copiarToken} style={{ justifyContent: 'center' }}>
+            {copied ? (
+              <>
+                <Check size={18} /> Copiado
+              </>
+            ) : (
+              <>
+                <Copy size={18} /> Copiar token
+              </>
+            )}
+          </Button>
+        </div>
+      </Modal>
     </div>
   );
 }

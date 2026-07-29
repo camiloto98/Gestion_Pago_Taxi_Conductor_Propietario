@@ -35,11 +35,9 @@ export default function RegistrarVehiculo() {
   }
 
   return (
-    <div className="container" style={{ padding: '26px 0 50px' }}>
-      <div className="glass" style={{ borderRadius: 22, padding: 18, maxWidth: 640 }}>
-        <div style={{ fontFamily: 'var(--font-display)', fontSize: 40, letterSpacing: 1.2 }}>
-          Registrar vehículo
-        </div>
+    <div className="container" style={{ padding: 'clamp(16px, 3vw, 26px) 0 50px' }}>
+      <div className="glass" style={{ borderRadius: 22, padding: 'clamp(14px, 3vw, 18px)', maxWidth: 640 }}>
+        <div className="title-display--md">Registrar vehículo</div>
         <form onSubmit={onSubmit} style={{ display: 'grid', gap: 12, marginTop: 16 }}>
           <div>
             <div style={{ fontSize: 12, opacity: 0.85, marginBottom: 6 }}>Placa</div>

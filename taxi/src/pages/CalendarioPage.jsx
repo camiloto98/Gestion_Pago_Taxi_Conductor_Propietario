@@ -31,17 +31,17 @@ export default function CalendarioPage() {
   }, [cursorDate, año]);
 
   return (
-    <div className="container" style={{ padding: '22px 0 50px' }}>
+    <div className="container" style={{ padding: 'clamp(14px, 3vw, 22px) 0 50px' }}>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12, flexWrap: 'wrap' }}>
         <div>
-          <div style={{ fontFamily: 'var(--font-display)', fontSize: 44, letterSpacing: 1.2 }}>Calendario</div>
-          <div style={{ opacity: 0.85, fontFamily: 'var(--font-mono)' }}>Vehículo #{vehiculoId}</div>
+          <div className="title-display">Calendario</div>
+          <div style={{ opacity: 0.85, fontFamily: 'var(--font-mono)', fontSize: 'clamp(12px, 2.5vw, 14px)' }}>Vehículo #{vehiculoId}</div>
         </div>
-        <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'center' }}>
+        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'center' }}>
           <button className="calNavBtn" onClick={() => setCursorDate((d) => addMonths(d, -1))}>
             ←
           </button>
-          <div className="calHeader">{header}</div>
+          <div className="calHeader" style={{ fontSize: 'clamp(20px, 4vw, 28px)' }}>{header}</div>
           <button className="calNavBtn" onClick={() => setCursorDate((d) => addMonths(d, 1))}>
             →
           </button>

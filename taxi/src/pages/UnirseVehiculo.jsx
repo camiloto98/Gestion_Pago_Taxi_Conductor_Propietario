@@ -25,9 +25,9 @@ export default function UnirseVehiculo() {
   }
 
   return (
-    <div className="container" style={{ padding: '26px 0 50px' }}>
-      <div className="glass" style={{ borderRadius: 22, padding: 18, maxWidth: 520 }}>
-        <div style={{ fontFamily: 'var(--font-display)', fontSize: 40, letterSpacing: 1.2 }}>Unirme a vehículo</div>
+    <div className="container" style={{ padding: 'clamp(16px, 3vw, 26px) 0 50px' }}>
+      <div className="glass" style={{ borderRadius: 22, padding: 'clamp(14px, 3vw, 18px)', maxWidth: 520 }}>
+        <div className="title-display--md">Unirme a vehículo</div>
         <div style={{ opacity: 0.85, marginTop: 6, fontFamily: 'var(--font-mono)' }}>Ej: TXI-4F9K</div>
         <form onSubmit={onSubmit} style={{ display: 'grid', gap: 12, marginTop: 16 }}>
           <Input value={codigo} onChange={(e) => setCodigo(e.target.value)} placeholder="TXI-4F9K" />

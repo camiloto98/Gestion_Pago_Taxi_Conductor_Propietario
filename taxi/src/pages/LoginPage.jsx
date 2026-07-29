@@ -26,9 +26,9 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="container" style={{ padding: '48px 0' }}>
-      <div className="glass" style={{ borderRadius: 22, padding: 22, maxWidth: 520, margin: '0 auto' }}>
-        <div style={{ fontFamily: 'var(--font-display)', fontSize: 40, letterSpacing: 1.2 }}>Iniciar sesión</div>
+    <div className="container" style={{ padding: 'clamp(24px, 5vw, 48px) 0' }}>
+      <div className="glass" style={{ borderRadius: 22, padding: 'clamp(16px, 3vw, 22px)', maxWidth: 520, margin: '0 auto' }}>
+        <div className="title-display--md">Iniciar sesión</div>
         <div style={{ opacity: 0.85, marginTop: 6 }}>Accede a tu calendario y a la comunidad.</div>
 
         <form onSubmit={onSubmit} style={{ display: 'grid', gap: 12, marginTop: 18 }}>

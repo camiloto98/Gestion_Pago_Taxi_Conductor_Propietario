@@ -36,11 +36,11 @@ export default function LandingPage() {
         style={{ position: 'absolute', top: 120, left: '6%', opacity: 0.18, filter: 'blur(0.3px)' }}
       />
       <TaxiSilhouette
-        className="taxiFloat"
+        className="taxiFloat hide-mobile"
         style={{ position: 'absolute', top: 260, right: '8%', opacity: 0.14, transform: 'scale(1.05)' }}
       />
       <TaxiSilhouette
-        className="taxiFloat"
+        className="taxiFloat hide-mobile"
         style={{ position: 'absolute', bottom: 120, left: '18%', opacity: 0.1, transform: 'scale(0.9)' }}
       />
 
@@ -53,7 +53,7 @@ export default function LandingPage() {
           style={{ padding: 26, borderRadius: 22, position: 'relative' }}
         >
           <div style={{ display: 'grid', gap: 14, textAlign: 'left' }}>
-            <div style={{ fontFamily: 'var(--font-display)', fontSize: 68, letterSpacing: 1.5, lineHeight: 0.92 }}>
+            <div className="title-display--lg" style={{ lineHeight: 0.92 }}>
               <span
                 style={{
                   background: 'linear-gradient(90deg, var(--amarillo-taxi), var(--amarillo-oscuro))',
@@ -65,7 +65,7 @@ export default function LandingPage() {
                 TAXICATOR
               </span>
             </div>
-            <div style={{ maxWidth: 740, opacity: 0.9, fontSize: 16 }}>
+            <div style={{ maxWidth: 740, opacity: 0.9, fontSize: 'clamp(14px, 3.5vw, 16px)' }}>
               Calendario de pagos con comprobantes, comentarios del propietario y comunidad de alertas para conductores.
               Todo en un diseño oscuro, limpio y rápido.
             </div>

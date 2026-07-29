@@ -134,12 +134,13 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: 8px;
 }
 .nav__brand {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
+  flex-shrink: 0;
 }
 .nav__brandIcon {
   display: grid;
@@ -163,13 +164,15 @@
 .nav__links {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 6px;
 }
 .nav__link {
-  padding: 10px 12px;
+  padding: 8px 10px;
   border-radius: 12px;
   border: 1px solid transparent;
   color: rgba(245, 245, 240, 0.84);
+  font-size: 14px;
+  white-space: nowrap;
 }
 .nav__link:hover {
   border-color: rgba(255, 215, 0, 0.18);
@@ -183,28 +186,30 @@
 .nav__right {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
+  flex-shrink: 0;
 }
 .nav__user {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 6px 10px;
+  gap: 8px;
+  padding: 4px 8px;
   border-radius: 16px;
   border: 1px solid rgba(255, 215, 0, 0.14);
   background: rgba(28, 28, 30, 0.55);
 }
 .nav__avatar {
-  width: 36px;
-  height: 36px;
-  border-radius: 14px;
+  width: 32px;
+  height: 32px;
+  border-radius: 12px;
   overflow: hidden;
   display: grid;
   place-items: center;
   border: 1px solid rgba(255, 215, 0, 0.18);
   background: rgba(255, 215, 0, 0.08);
   color: var(--amarillo-taxi);
-  font: 800 14px/1 var(--font-ui);
+  font: 800 13px/1 var(--font-ui);
+  flex-shrink: 0;
 }
 .nav__avatar img {
   width: 100%;
@@ -229,7 +234,68 @@
 .nav__logout {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
+  font-size: 13px;
+  padding: 8px 10px;
+}
+
+/* Responsive Navbar */
+@media (max-width: 768px) {
+  .nav__inner {
+    height: 60px;
+    gap: 4px;
+  }
+  .nav__brandText {
+    font-size: 20px;
+  }
+  .nav__brandIcon {
+    width: 32px;
+    height: 32px;
+  }
+  .nav__brandIcon svg {
+    width: 18px;
+    height: 18px;
+  }
+  .nav__links {
+    gap: 2px;
+  }
+  .nav__link {
+    padding: 6px 8px;
+    font-size: 12px;
+  }
+  .nav__user {
+    padding: 3px 6px;
+    gap: 6px;
+  }
+  .nav__avatar {
+    width: 28px;
+    height: 28px;
+    font-size: 11px;
+  }
+  .nav__userMeta {
+    display: none;
+  }
+  .nav__logout {
+    padding: 6px 8px;
+    font-size: 12px;
+  }
+  .nav__logout span {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav__links .nav__link {
+    font-size: 11px;
+    padding: 5px 6px;
+  }
+  .nav__brandText {
+    font-size: 17px;
+    letter-spacing: 0.8px;
+  }
+  .nav__right {
+    gap: 4px;
+  }
 }
 
 .roleChip {
@@ -259,6 +325,22 @@
   border-radius: 18px;
   border: 1px solid rgba(255, 215, 0, 0.12);
   background: rgba(28, 28, 30, 0.55);
+}
+
+@media (max-width: 600px) {
+  .vehRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .vehRow > div:last-child {
+    width: 100%;
+  }
+  .vehRow > div:last-child a,
+  .vehRow > div:last-child button {
+    width: 100%;
+    justify-content: center;
+  }
 }
 
 .calHeader {
@@ -481,6 +563,61 @@
   gap: 10px;
   margin-top: 12px;
   align-items: center;
+}
+
+/* Responsive: form grid columns collapse to single column */
+@media (max-width: 600px) {
+  .comentarioBox {
+    grid-template-columns: 1fr;
+  }
+  .comentarioBox button {
+    width: 100%;
+  }
+}
+
+/* Responsive: modal padding and title */
+@media (max-width: 600px) {
+  .ui-modal__backdrop {
+    padding: 10px;
+  }
+  .ui-modal__header {
+    padding: 12px 14px;
+  }
+  .ui-modal__title {
+    font-size: 16px;
+  }
+  .ui-modal__body {
+    padding: 12px 14px;
+  }
+  .ui-modal__footer {
+    padding: 12px 14px;
+    flex-direction: column;
+  }
+  .ui-modal__footer button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Responsive: feed card */
+@media (max-width: 600px) {
+  .feedCard__top {
+    flex-direction: column;
+  }
+  .feedMeta {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .feedTitle {
+    font-size: 16px;
+  }
+}
+
+/* Responsive: collapse 2-column form grids to single column */
+@media (max-width: 600px) {
+  div[style*="gridTemplateColumns: '1fr 1fr'"] {
+    grid-template-columns: 1fr !important;
+  }
 }
 
 @keyframes spin {

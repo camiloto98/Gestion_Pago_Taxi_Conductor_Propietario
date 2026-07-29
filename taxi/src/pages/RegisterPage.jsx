@@ -29,9 +29,9 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="container" style={{ padding: '48px 0' }}>
-      <div className="glass" style={{ borderRadius: 22, padding: 22, maxWidth: 560, margin: '0 auto' }}>
-        <div style={{ fontFamily: 'var(--font-display)', fontSize: 40, letterSpacing: 1.2 }}>Crear cuenta</div>
+    <div className="container" style={{ padding: 'clamp(24px, 5vw, 48px) 0' }}>
+      <div className="glass" style={{ borderRadius: 22, padding: 'clamp(16px, 3vw, 22px)', maxWidth: 560, margin: '0 auto' }}>
+        <div className="title-display--md">Crear cuenta</div>
         <div style={{ opacity: 0.85, marginTop: 6 }}>Elige tu rol y empieza a usar TaxiPay.</div>
 
         <form onSubmit={onSubmit} style={{ display: 'grid', gap: 12, marginTop: 18 }}>
