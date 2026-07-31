@@ -50,9 +50,14 @@ export default function DashboardConductor() {
                       Propietario: {v.propietario_nombre || '—'}
                     </div>
                   </div>
-                  <Link to={`/calendario/${v.id}`}>
-                    <Button variant="ghost">Ver calendario</Button>
-                  </Link>
+                  <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', justifyContent: 'flex-end' }}>
+                    <Link to={`/calendario/${v.id}`}>
+                      <Button variant="ghost">Ver calendario</Button>
+                    </Link>
+                    <Link to={`/deudas/${v.id}`}>
+                      <Button variant="ghost">Ver deudas</Button>
+                    </Link>
+                  </div>
                 </div>
               ))}
             </div>

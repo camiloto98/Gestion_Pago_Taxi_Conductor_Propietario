@@ -16,6 +16,7 @@ const vehiculosRoutes = require('./routes/vehiculos.routes');
 const tokensRoutes = require('./routes/tokens.routes');
 const pagosRoutes = require('./routes/pagos.routes');
 const comentariosRoutes = require('./routes/comentarios.routes');
+const deudasRoutes = require('./routes/deudas.routes');
 const feedRoutes = require('./routes/feed.routes');
 
 const app = express();
@@ -57,6 +58,7 @@ app.use('/api/vehiculos', vehiculosRoutes);
 app.use('/api/tokens', tokensRoutes);
 app.use('/api/pagos', pagosRoutes);
 app.use('/api/comentarios', comentariosRoutes);
+app.use('/api/deudas', deudasRoutes);
 app.use('/api/feed', feedRoutes);
 
 // Multer / custom errors

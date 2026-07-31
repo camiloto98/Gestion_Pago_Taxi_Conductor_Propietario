@@ -125,9 +125,10 @@
   position: sticky;
   top: 0;
   z-index: 20;
-  background: rgba(10, 10, 10, 0.95);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(255, 215, 0, 0.12);
+  background: rgba(10, 10, 10, 0.82);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255, 215, 0, 0.16);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3), 0 0 20px rgba(255, 215, 0, 0.04);
 }
 .nav__inner {
   height: 68px;
@@ -145,21 +146,29 @@
 .nav__brandIcon {
   display: grid;
   place-items: center;
-  width: 38px;
-  height: 38px;
+  width: 40px;
+  height: 40px;
   border-radius: 14px;
-  background: rgba(255, 215, 0, 0.08);
-  border: 1px solid rgba(255, 215, 0, 0.16);
-  box-shadow: 0 0 22px rgba(255, 215, 0, 0.12);
-  color: var(--amarillo-taxi);
+  background: linear-gradient(145deg, rgba(255, 215, 0, 0.1), rgba(255, 215, 0, 0.03));
+  border: 1px solid rgba(255, 215, 0, 0.22);
+  box-shadow:
+    0 0 24px rgba(255, 215, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  flex-shrink: 0;
+  overflow: hidden;
+  position: relative;
 }
+
+.nav__brandIcon::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.12), transparent 55%);
+  pointer-events: none;
+}
+
 .nav__brandText {
-  font: 900 26px/1 var(--font-display);
-  letter-spacing: 1.2px;
-  background: linear-gradient(90deg, var(--amarillo-taxi), var(--amarillo-oscuro));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  display: none;
 }
 .nav__links {
   display: flex;
@@ -242,19 +251,21 @@
 /* Responsive Navbar */
 @media (max-width: 768px) {
   .nav__inner {
-    height: 60px;
+    height: 56px;
     gap: 4px;
   }
-  .nav__brandText {
-    font-size: 20px;
+  .nav__brand {
+    gap: 6px;
+    min-width: 0;
   }
   .nav__brandIcon {
-    width: 32px;
-    height: 32px;
+    width: 34px;
+    height: 34px;
+    border-radius: 12px;
   }
-  .nav__brandIcon svg {
-    width: 18px;
-    height: 18px;
+  .nav__brandIcon .taxicator-logo {
+    width: 28px;
+    height: 28px;
   }
   .nav__links {
     gap: 2px;
@@ -289,9 +300,13 @@
     font-size: 11px;
     padding: 5px 6px;
   }
-  .nav__brandText {
-    font-size: 17px;
-    letter-spacing: 0.8px;
+  .nav__brandIcon {
+    width: 32px;
+    height: 32px;
+  }
+  .nav__brandIcon .taxicator-logo {
+    width: 26px;
+    height: 26px;
   }
   .nav__right {
     gap: 4px;
@@ -401,16 +416,6 @@
   gap: 8px;
   padding: 0 6px 6px;
 }
-@media (max-width: 720px) {
-  .calGrid,
-  .calWeekdays {
-    width: 760px;
-  }
-  .calWrap {
-    overflow-x: auto;
-  }
-}
-
 .diaCell {
   position: relative;
   height: 86px;
@@ -500,6 +505,102 @@
   border: 1px solid rgba(255, 215, 0, 0.35);
   color: var(--amarillo-taxi);
   pointer-events: none;
+}
+
+/* Responsive calendar: collapse to compact cells instead of forcing 760px width */
+@media (max-width: 720px) {
+  .calGrid,
+  .calWeekdays {
+    width: 100%;
+    gap: 5px;
+  }
+  .calWrap {
+    overflow-x: visible;
+    padding: 10px;
+  }
+  .diaCell {
+    height: 62px;
+    border-radius: 12px;
+  }
+  .diaCell:hover .diaCell__thumb {
+    opacity: 0;
+  }
+  .diaCell--today {
+    box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.09);
+  }
+  .diaCell__num {
+    top: 6px;
+    right: 7px;
+    font-size: 11px;
+  }
+  .diaCell__icon {
+    left: 7px;
+    bottom: 7px;
+  }
+  .diaCell__icon svg {
+    width: 14px;
+    height: 14px;
+  }
+  .diaCell__dot {
+    top: 6px;
+    left: 7px;
+    width: 6px;
+    height: 6px;
+  }
+  .diaCell__badge {
+    display: none;
+  }
+  .calTop {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .calGrid,
+  .calWeekdays {
+    gap: 3px;
+    padding: 0 2px 5px;
+  }
+  .calWrap {
+    padding: 8px 6px;
+    border-radius: 16px;
+  }
+  .diaCell {
+    height: 48px;
+    border-radius: 10px;
+  }
+  .diaCell__num {
+    top: 4px;
+    right: 5px;
+    font-size: 10px;
+  }
+  .diaCell__icon {
+    left: 5px;
+    bottom: 5px;
+  }
+  .diaCell__icon svg {
+    width: 12px;
+    height: 12px;
+  }
+  .diaCell__dot {
+    top: 4px;
+    left: 5px;
+    width: 5px;
+    height: 5px;
+  }
+  .calCounter {
+    font-size: 12px;
+  }
+  .calHint {
+    font-size: 12px;
+  }
+  .calNavBtn {
+    width: 34px;
+    height: 34px;
+    border-radius: 10px;
+  }
 }
 
 .uploadBox {
@@ -617,6 +718,53 @@
 @media (max-width: 600px) {
   div[style*="gridTemplateColumns: '1fr 1fr'"] {
     grid-template-columns: 1fr !important;
+  }
+}
+
+.deudaCard {
+  display: grid;
+  gap: 10px;
+  padding: 14px 14px;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 215, 0, 0.12);
+  background: rgba(28, 28, 30, 0.55);
+}
+.deudaCard__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.deudaCard__stats {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  opacity: 0.92;
+}
+.deudaCard__actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+@media (max-width: 600px) {
+  .deudaCard__head {
+    flex-direction: column;
+    gap: 8px;
+  }
+  .deudaCard__stats {
+    flex-direction: column;
+    gap: 4px;
+  }
+  .deudaCard__actions {
+    width: 100%;
+  }
+  .deudaCard__actions button,
+  .deudaCard__actions a {
+    width: 100%;
+    justify-content: center;
   }
 }
 

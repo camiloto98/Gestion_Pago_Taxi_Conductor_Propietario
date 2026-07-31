@@ -1,7 +1,9 @@
 import { Link, NavLink, useNavigate } from 'react-router-dom';
-import { CarTaxiFront, LogOut } from 'lucide-react';
+import { LogOut } from 'lucide-react';
 import { useAuth } from '../../hooks/useAuth';
 import Button from '../ui/Button';
+import TaxicatorLogo from '../brand/TaxicatorLogo';
+import TaxicatorWordmark from '../brand/TaxicatorWordmark';
 
 export default function Navbar() {
   const { user, logout } = useAuth();
@@ -14,9 +16,9 @@ export default function Navbar() {
       <div className="container nav__inner">
         <Link to="/" className="nav__brand" aria-label="TAXICATOR">
           <span className="nav__brandIcon">
-            <CarTaxiFront size={22} />
+            <TaxicatorLogo size={34} />
           </span>
-          <span className="nav__brandText">TAXICATOR</span>
+          <TaxicatorWordmark variant="nav" />
         </Link>
 
         {user ? (

@@ -81,6 +81,9 @@ export default function DashboardPropietario() {
                     <Link to={`/calendario/${v.id}`}>
                       <Button variant="ghost">Ver calendario</Button>
                     </Link>
+                    <Link to={`/deudas/${v.id}`}>
+                      <Button variant="ghost">Ver deudas</Button>
+                    </Link>
                   </div>
                 </div>
               ))}

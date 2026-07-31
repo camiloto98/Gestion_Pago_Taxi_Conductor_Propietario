@@ -1,5 +1,6 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
+import TechBackground from './components/layout/TechBackground';
 import ProtectedRoute from './components/layout/ProtectedRoute';
 import { useAuth } from './hooks/useAuth';
 
@@ -11,6 +12,7 @@ import DashboardPropietario from './pages/DashboardPropietario';
 import RegistrarVehiculo from './pages/RegistrarVehiculo';
 import UnirseVehiculo from './pages/UnirseVehiculo';
 import CalendarioPage from './pages/CalendarioPage';
+import DeudasPage from './pages/DeudasPage';
 import FeedPage from './pages/FeedPage';
 
 function DashboardRouter() {
@@ -23,9 +25,11 @@ export default function App() {
   const { user } = useAuth();
 
   return (
-    <div>
-      <Navbar />
-      <Routes>
+    <div className="app-shell">
+      <TechBackground />
+      <div className="app-shell__content">
+        <Navbar />
+        <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={user ? <Navigate to="/dashboard" replace /> : <LoginPage />} />
         <Route path="/register" element={user ? <Navigate to="/dashboard" replace /> : <RegisterPage />} />
@@ -73,6 +77,14 @@ export default function App() {
           }
         />
         <Route
+          path="/deudas/:vehiculoId"
+          element={
+            <ProtectedRoute>
+              <DeudasPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
           path="/comunidad"
           element={
             <ProtectedRoute>
@@ -82,7 +94,8 @@ export default function App() {
         />
 
         <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
+        </Routes>
+      </div>
     </div>
   );
 }

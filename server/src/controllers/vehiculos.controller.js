@@ -44,6 +44,14 @@ async function misVehiculos(req, res, next) {
     const [rows] = await pool.query(
       `SELECT v.*,
         (
+          SELECT u.id
+          FROM tokens_acceso t
+          JOIN users u ON u.id = t.conductor_id
+          WHERE t.vehiculo_id = v.id AND t.usado = TRUE AND t.conductor_id IS NOT NULL
+          ORDER BY t.creado_en DESC
+          LIMIT 1
+        ) AS conductor_id,
+        (
           SELECT u.nombre
           FROM tokens_acceso t
           JOIN users u ON u.id = t.conductor_id
